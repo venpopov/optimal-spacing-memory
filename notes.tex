@@ -157,22 +157,23 @@ To simplify the expression, denote $\tilde{y} = y+1$ and $\tilde{x}=x+1$, the st
     \tilde{y} = \frac{\tilde{x}-1}{\alpha \tilde{x}^{\frac{\gamma}{1+\gamma}}-1}
 \end{equation}
 
-Since the exponent of $\tilde{x}$ in the denominator is $\gamma/(1+\gamma) < 1$, as the test lag x increases, so does the optimal study lag $y$.
+Since the exponent of $\tilde{x}$ in the denominator is $\gamma/(1+\gamma) < 1$, as the test lag x increases, so does the optimal study lag $y$. 
 
+Figures below show the optimal offset study gap $\tilde y$ in days as a function of offset test delay in days (both measures offset by 1 second as described above). First figure is on the native linear scale, while second figure is on a log10-log10 scale. Both parameters affect the position of the optimal line, but do not change the qualitative results. Increasing the learning during both study sessions makes the optimal study gap longer for the same test delay, although the effect is modest. The forgetting rate has more dramatic effects, but again it just shifts the intercept on the log-log scale. Neither parameter changes the shape of the optimal y as a function of x. 
 
-Therefore we have:
-\begin{equation}
-\begin{aligned}
-  y^* &= \arg \max_y B(x,y) \\
-   &= \frac{x \delta ^{\frac{1}{d+1}}}{(x+1) ^{\frac{d}{d+1}}-\delta ^{\frac{1}{d+1}}} - 1
-\end{aligned}
-\end{equation}
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{figures/f1_spacing_parameters_linear.png}
+    \caption{Enter Caption}
+    \label{fig:enter-label}
+\end{figure}
 
-$y^*$ is a monotonic increasing function $x$ (Figure 1), although $log(y)$ is not a linear function of $log(x)$ (Figure 2). But it becomes linear when x is large, as the asymptotic behavior of $y$ approximates a power law function of $x$ (Figure 3, when $x > 10$):
-\begin{equation}
-y^* \sim x^{\frac{1}{d+1}}
-\end{equation}
-All plots were done using chatGPT. Need to update them to simulations with codes later.
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{figures/f2_spacing_parameters_log_log.png}
+    \caption{Enter Caption}
+    \label{fig:enter-label}
+\end{figure}
 
 %\section{General Discussion}
 
