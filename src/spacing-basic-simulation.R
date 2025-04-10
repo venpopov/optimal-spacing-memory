@@ -22,7 +22,7 @@ MAX_DELAY <- 1000 * SECONDS_PER_DAY
 MIN_DELAY <- 1
 test_lag <- 10^seq(log10(MIN_DELAY), log10(MAX_DELAY), length = 1000)
 
-conditions <- expand.grid(delta = c(0.25, 0.5, 0.8), gamma = c(0.25, 0.5, 0.8))
+conditions <- expand.grid(delta = c(0.25, 0.5, 0.8, 1), gamma = c(0.01, 0.25, 0.5, 0.8))
 curves_data <- pmap(conditions, construct_curves) |> dplyr::bind_rows()
 
 f1 <- curves_data |>
@@ -50,5 +50,6 @@ f2 <- curves_data |>
   theme(legend.position = "bottom")
 
 
-ggsave("figures/f1_spacing_parameters_linear.png", f1, width = 9, height = 4)
-ggsave("figures/f2_spacing_parameters_log_log.png", f2, width = 11, height = 5)
+ggsave("figures/f1_spacing_parameters_linear.png", f1, width = 8, height = 8)
+ggsave("figures/f2_spacing_parameters_log_log.png", f2, width = 8, height = 8)
+
