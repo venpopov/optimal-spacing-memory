@@ -1,0 +1,155 @@
+% "draftfirst" or "draftall" as option to watermark, 10pt/11pt/12pt for font size, noextraspace if there are spacing issues, "man" for regular papers (assignments, journal submissions), jou for journal-esque formatting.
+\documentclass[man, 12pt, floatsintext]{apa6}
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage[american]{babel}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subfigure}
+\usepackage[style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex}
+\setlength{\parskip}{12\pt}
+%\usepackage{lineno}
+%\linenumbers
+% Removes month from bibliography entries, which shouldn't be there for academic journals - optionally, remove the month entries from your .bib file on the offending files. Comment it out if using popular media, newspaper articles, etc. that need the month field. 
+\AtEveryBibitem{
+  \clearfield{month}
+}
+\DeclareLanguageMapping{american}{american-apa}
+
+% Removes "retrieved from on date" from bibliography entry unless it is a wiki URL, which is closer to the spirit of APA's rule. See biblatex-apa documentation for more info.
+\DeclareSourcemap{
+\maps[datatype=bibtex]{
+\map{
+\step[fieldsource=url,
+notmatch=\regexp{wiki},
+final=1]
+\step[fieldset=urldate, null]
+}
+}
+}
+
+% Add your BibTeX files here. Use source location if you aren't keeping them as the same folder as your document.
+\addbibresource{ref.bib}
+
+% Can help catch outdated code practices by giving you console warnings. Commented out by default so as to not confuse new users.
+%\usepackage[l2tabu]{nag}
+
+
+% The following four fields make up some of the front matter of your document. If working on an assignment for a course, I typically use "affiliation" for the class name. I have commented out abstract since minimal usage doesn't require it and leaving it blank will generate a blank page. Ignore the warning about the lack of abstract. 
+
+% Additional comments to address: https://docs.google.com/document/d/1GbW5qqv1MEXInuRyePvy8ksl3qgp576Iy1_85DOU13Q/edit
+
+% \affiliation{Psychology Department$^{1}$, Computer Science Department$^{2}$, Center for Cognitive Science$^{3}$, Rutgers University--New Brunswick; Princeton Neuroscience Institute$^{4}$, Psychology Department$^{5}$, Computer Science Department$^{6}$, Princeton University}
+
+
+% \abstract{}
+% \keywords{}
+% \authornote{}
+
+\begin{document}
+
+%\maketitle
+\section{Derivation}
+Set $y$ as the study separation time between study 1 and study 2 and $x$ as the test delay. We will show below how spacing effects emerge naturally from two simple assumptions about learning and forgetting:  
+
+\textbf{(1) Delta learning rule:} When studying an item, a new trace is formed of the memory strength: 
+\begin{equation}
+B_{new} =\delta (B_{max}-B_{current}),
+\end{equation}
+where $B_{max} = 1$, $\delta$ is the learning rate ($0 < \delta < 1$), and $B_{current}$ is the summed strength of memory traces formed during previous repetitions of the item. Thus, after the very first occurrence of an item, its memory trace has strength $B_1 = \delta$.
+
+\textbf{(2) Trace-specific power-based decay:}  After delay of time $t$, forgetting follows the power law function: 
+\begin{equation}
+f(t) = (1+t) ^{-d},
+\end{equation}
+
+where $f(0)=1$ and $d>0$ and each memory trace decays independently as a function of time since its formation.
+
+At any point in time, the summed memory strength is the sum of each trace weighted by its decay function:
+\begin{equation}
+B_{current}=\sum_{k=1}^{n}B_kf(t_k)    
+\end{equation}
+
+
+with $k$ being the k-th study repetition and $t_k$ is the time elapsed since. 
+
+In the special case with two study repetitions separated by an interval $y$ and where memory is tested \textit{x} units of time after the second session, we have the overall memory strength $B$ at test is a sum of the two memory traces after forgetting:
+
+\begin{equation}
+\begin{aligned}
+B(x,y) &= B_{1} f(x+y) + B_{2} f(x)\\
+&= B_{1} f(x+y) + \delta (1 - B_{1} f(y)) f(x)\\
+&= \delta (x+y+1)^{-d} + \delta (1-\delta (y+1)^{-d}) (x+1)^{-d}\\
+&= \delta (x+y+1)^{-d} + \delta (x+1)^{-d} -\delta^{2} (x+1)^{-d}(y+1)^{-d}\\
+\end{aligned}
+\end{equation}
+
+To capture the spacing effect, we are interested in deriving the optimal study separation $y$ that maximizes the memory strength B when the test delay $x$ is fixed. 
+
+\begin{equation}
+\frac{dB}{dy} = \delta (-d) (x+y+1)^{-d-1} - \delta^{2} (-d) (x+1)^{-d} (y+1)^{-d-1}
+\end{equation}
+
+Setting $\frac{dB}{dy}=0$, we have:
+
+\begin{equation}
+ (x+y+1)^{-d-1} = \delta(x+1)^{-d} (y+1)^{-d-1}
+\end{equation}
+
+With $r = \frac{1}{-d-1}$, we have:
+
+\begin{equation}
+\begin{aligned}
+ ((x+y+1)^{-d-1})^{r} &= (\delta(x+1)^{-d} (y+1)^{-d-1})^{r} \\
+  x+(y+1) &= \delta ^{r} (x+1) ^{\frac{d}{d+1}} (y+1) \\
+  x &= (y+1)(\delta ^{r} (x+1) ^{\frac{d}{d+1}}-1) \\
+  y &= \frac{x}{\delta ^{r} (x+1) ^{\frac{d}{d+1}}-1} - 1 \\
+  y &= \frac{x \delta ^{\frac{1}{d+1}}}{(x+1) ^{\frac{d}{d+1}}-\delta ^{\frac{1}{d+1}}} - 1
+\end{aligned}
+\end{equation}
+
+Therefore we have:
+\begin{equation}
+\begin{aligned}
+  y^* &= \arg \max_y B(x,y) \\
+   &= \frac{x \delta ^{\frac{1}{d+1}}}{(x+1) ^{\frac{d}{d+1}}-\delta ^{\frac{1}{d+1}}} - 1
+\end{aligned}
+\end{equation}
+
+$y^*$ is a monotonic increasing function $x$ (Figure 1), although $log(y)$ is not a linear function of $log(x)$ (Figure 2). But it becomes linear when x is large, as the asymptotic behavior of $y$ approximates a power law function of $x$ (Figure 3, when $x > 10$):
+\begin{equation}
+y^* \sim x^{\frac{1}{d+1}}
+\end{equation}
+All plots were done using chatGPT. Need to update them to simulations with codes later.
+
+%\section{General Discussion}
+
+%\printbibliography
+
+%\clearpage
+% I have commented out the appendix section since it isn't a standard for minimal documents. 
+%\section{Appendix}
+% \renewcommand\thefigure{A.\arabic{figure}}    
+% \setcounter{figure}{0}
+
+
+
+  % ==============================================================
+  %   Copyright (C) 2015  Jacob Long
+
+  %   This program is free software: you can redistribute it and/or modify
+  %   it under the terms of the GNU General Public License as published by
+  %   the Free Software Foundation, either version 3 of the License, or
+  %   (at your option) any later version.
+
+  %   This program is distributed in the hope that it will be useful,
+  %   but WITHOUT ANY WARRANTY; without even the implied warranty of
+  %   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  %   GNU General Public License for more details.
+
+  %   You should have received a copy of the GNU General Public License
+  %   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  % ===============================================================
+
+\end{document}
