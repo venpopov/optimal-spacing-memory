@@ -1,4 +1,3 @@
-% "draftfirst" or "draftall" as option to watermark, 10pt/11pt/12pt for font size, noextraspace if there are spacing issues, "man" for regular papers (assignments, journal submissions), jou for journal-esque formatting.
 \documentclass[man, 12pt, floatsintext]{apa6}
 \usepackage{amsmath, amsthm, amssymb}
 \usepackage[american]{babel}
@@ -8,15 +7,12 @@
 \usepackage{caption}
 \usepackage{subfigure}
 \usepackage[style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex}
-%\usepackage{lineno}
-%\linenumbers
-% Removes month from bibliography entries, which shouldn't be there for academic journals - optionally, remove the month entries from your .bib file on the offending files. Comment it out if using popular media, newspaper articles, etc. that need the month field. 
+
 \AtEveryBibitem{
   \clearfield{month}
 }
 \DeclareLanguageMapping{american}{american-apa}
 
-% Removes "retrieved from on date" from bibliography entry unless it is a wiki URL, which is closer to the spirit of APA's rule. See biblatex-apa documentation for more info.
 \DeclareSourcemap{
 \maps[datatype=bibtex]{
 \map{
@@ -28,16 +24,8 @@ final=1]
 }
 }
 
-% Add your BibTeX files here. Use source location if you aren't keeping them as the same folder as your document.
 \addbibresource{ref.bib}
 
-% Can help catch outdated code practices by giving you console warnings. Commented out by default so as to not confuse new users.
-%\usepackage[l2tabu]{nag}
-
-
-% The following four fields make up some of the front matter of your document. If working on an assignment for a course, I typically use "affiliation" for the class name. I have commented out abstract since minimal usage doesn't require it and leaving it blank will generate a blank page. Ignore the warning about the lack of abstract. 
-
-% Additional comments to address: https://docs.google.com/document/d/1GbW5qqv1MEXInuRyePvy8ksl3qgp576Iy1_85DOU13Q/edit
 
 % \affiliation{Psychology Department$^{1}$, Computer Science Department$^{2}$, Center for Cognitive Science$^{3}$, Rutgers University--New Brunswick; Princeton Neuroscience Institute$^{4}$, Psychology Department$^{5}$, Computer Science Department$^{6}$, Princeton University}
 
@@ -179,29 +167,5 @@ Figures below show the optimal offset study gap $\tilde y$ in days as a function
 
 %\printbibliography
 
-%\clearpage
-% I have commented out the appendix section since it isn't a standard for minimal documents. 
-%\section{Appendix}
-% \renewcommand\thefigure{A.\arabic{figure}}    
-% \setcounter{figure}{0}
-
-
-
-  % ==============================================================
-  %   Copyright (C) 2015  Jacob Long
-
-  %   This program is free software: you can redistribute it and/or modify
-  %   it under the terms of the GNU General Public License as published by
-  %   the Free Software Foundation, either version 3 of the License, or
-  %   (at your option) any later version.
-
-  %   This program is distributed in the hope that it will be useful,
-  %   but WITHOUT ANY WARRANTY; without even the implied warranty of
-  %   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  %   GNU General Public License for more details.
-
-  %   You should have received a copy of the GNU General Public License
-  %   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-  % ===============================================================
 
 \end{document}
