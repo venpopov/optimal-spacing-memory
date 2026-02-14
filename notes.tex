@@ -107,7 +107,7 @@ Since $0 < \delta < 1$, we can simplify them and have this final system of equat
 
 \subsection{Exponential vs power-based decay}
 
-Consider first the exponential-based decay with $f(x) = e^{-dx}$: 
+Consider first the exponential-based decay with $f(x) = e^{-\gamma x}$: 
 \begin{equation}
 \begin{aligned}
     \delta^{-1}\frac{dB}{dy} &= \frac{d}{dy} e^{-\gamma(x+y)} - \delta e^{-\gamma x} \frac{d}{dy}e^{-\gamma y} \\
@@ -148,6 +148,8 @@ To simplify the expression, denote $\tilde{y} = y+1$ and $\tilde{x}=x+1$, the st
 Since the exponent of $\tilde{x}$ in the denominator is $\gamma/(1+\gamma) < 1$, as the test lag x increases, so does the optimal study lag $y$. 
 
 Figures below show the optimal offset study gap $\tilde y$ in days as a function of offset test delay in days (both measures offset by 1 second as described above). First figure is on the native linear scale, while second figure is on a log10-log10 scale. Both parameters affect the position of the optimal line, but do not change the qualitative results. Increasing the learning during both study sessions makes the optimal study gap longer for the same test delay, although the effect is modest. The forgetting rate has more dramatic effects, but again it just shifts the intercept on the log-log scale. Neither parameter changes the shape of the optimal y as a function of x. 
+
+With the exception of $\gamma = 0.01$, all optimal lines are below the diagonal line, meaning that the optimal study gap is less than the test day for most parameter combinations. We included the $0.01$ decay rate condition to explore the extremes of the model - that said, it is not a reasonable parameter value and it is far from the range typically used  in power-based decay forgetting functions (REFS). All parameter values reproduce the general data pattern from Cepeda (2008). Particular parameter values can be chosen for a perfect fit to the empirical regression line, if desired.
 
 \begin{figure}
     \centering
